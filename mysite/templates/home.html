@@ -8,20 +8,20 @@
       <ul>
         {% for post in posts %}
           <li>
-            <h3>{{ post.restaurant }}</h3>
+            <h3>{{ post.foodname }}</h3>
             <p>{{ post.description }}</p>
             <p>Pickup Location: {{ post.pickup_location }}</p>
             {% if post.photo %}
               <img src="{{ post.photo.url }}" alt="Food Image" style="width: 200px; height: 200px;">
             {% endif %}
-            <p>Expires at: {{ post.expiry_time }}</p>
+            <p>Expires at: {{ post.expiration_time }}</p>
           </li>
         {% endfor %}
       </ul>
     {% else %}
       <p>No available food posts at the moment.</p>
     {% endif %}
-    
+
     <a href="{% url 'logout' %}">Logout</a>
 {% else %}
     <a href="{% url 'login' %}">Login</a> |
