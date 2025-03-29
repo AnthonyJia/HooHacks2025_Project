@@ -8,5 +8,5 @@ def home_view(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='home'),
-    path('users/', include('accounts.urls')),
+    path('accounts/', include('accounts.urls')),
 ]
