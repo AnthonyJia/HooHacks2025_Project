@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from geopy.geocoders import Nominatim
+from django.conf import settings
 
 class CustomUser(AbstractUser):
     pass
@@ -16,7 +17,7 @@ class FoodPost(models.Model):
     longitude = models.FloatField(blank=True, null=True)  # Auto-generated
     expiration_time = models.DateTimeField()  # Post expiration, changable to countdown timer
     created_at = models.DateTimeField(auto_now_add=True)  # Post creation time
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)  # Restaurant owner
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # Restaurant owner
 
     def save(self, *args, **kwargs):
         if self.pickup_location and (self.latitude is None or self.longitude is None):

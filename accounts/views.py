@@ -33,15 +33,15 @@ def logout_view(request):
 
 def create_post(request):
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
+        form = FoodPostForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('home')  # Redirect to homepage after saving
     else:
-        form = PostForm()
-    return render(request, 'create_post.html', {'form': form})
+        form = FoodPostForm()
+    return render(request, 'accounts/create_post.html', {'form': form})
 
 def home(request):
     # Get all posts that haven't expired
-    available_posts = Post.objects.filter(expiry_time__gt=timezone.now())
+    available_posts = FoodPost.objects.filter(expiration_time__gt=timezone.now())
     return render(request, 'home.html', {'posts': available_posts})
