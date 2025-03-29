@@ -13,8 +13,10 @@ class LoginForm(AuthenticationForm):
 
 class FoodPostForm(forms.ModelForm):
     class Meta:
-        model = FoodPostfields = ["foodname", "description", "image", "pickup_location", "latitude", "longitude", "expiration_time"]
+        model = FoodPost
+        fields = ["foodname", "description", "image", "pickup_location", "latitude", "longitude", "expiration_time"]
+
         widgets = {
             "expiration_time": forms.DateTimeInput(attrs={"type": "datetime-local"})
         }
-        
+
