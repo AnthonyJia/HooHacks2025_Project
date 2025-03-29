@@ -10,3 +10,6 @@ __pycache__/
 
 #ignores database files
 db.sqlite3
+
+#ignores food_images
+food_images/
