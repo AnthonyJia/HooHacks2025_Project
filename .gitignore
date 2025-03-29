@@ -1,0 +1,12 @@
+#ignores virtual environment
+myenv/
+venv/
+.env
+
+#ignores compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+
+#ignores database files
+db.sqlite3
