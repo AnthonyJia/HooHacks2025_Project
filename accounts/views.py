@@ -35,7 +35,9 @@ def create_post(request):
     if request.method == 'POST':
         form = FoodPostForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            food_post = form.save(commit=False)
+            food_post.owner = request.user  # Set the owner field to the current user
+            food_post.save()
             return redirect('home')  # Redirect to homepage after saving
     else:
         form = FoodPostForm()
