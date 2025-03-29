@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, LoginForm
-from .forms import PostForm
+from .forms import FoodPostForm
 from .models import Post
 from django.utils import timezone
 
