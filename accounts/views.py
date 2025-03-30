@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignUpForm, LoginForm
 from .forms import FoodPostForm
 from .models import FoodPost
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 
 def signup_view(request):
     if request.method == 'POST':
@@ -51,3 +53,20 @@ def feed_view(request):
 
 def landing_page(request):
     return render(request,'home.html')
+
+@login_required
+def edit_post_view(request, post_id):
+    post = get_object_or_404(FoodPost, id=post_id)
+
+    if post.owner != request.user:
+        return HttpResponseForbidden("You are not allowed to edit this post.")
+
+    if request.method == 'POST':
+        form = FoodPostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('home')  # Change to the actual URL name
+    else:
+        form = FoodPostForm(instance=post)
+
+    return render(request, 'accounts/edit_post.html', {'form': form, 'post': post})

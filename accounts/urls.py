@@ -11,6 +11,7 @@ urlpatterns = [
     path('feed/', views.feed_view, name='feed'),
     path('create/', views.create_post, name='create_post'),
     path('',views.landing_page, name = 'home'),
+    path('post/<int:post_id>/edit/', views.edit_post_view, name='edit_post'),
     
 ]
 if settings.DEBUG:

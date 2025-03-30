@@ -89,6 +89,9 @@
         <p>{{ post.description }}</p>
         <p><strong>Pickup Location:</strong> {{ post.pickup_location }}</p>
         <p><strong>Expires:</strong> {{ post.expiration_time }}</p>
+        {% if request.user == post.owner %}
+        <a href="{% url 'edit_post' post.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+        {% endif %}
       </div>
     {% empty %}
       <p>No available food posts right now. Be the first to share!</p>
