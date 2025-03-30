@@ -1,7 +1,160 @@
-<h2>Login</h2>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-</form>
-<a href="{% url 'signup' %}">Don't have an account? Sign up</a>
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GreenFork | Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: url("{% static 'greent.jpg' %}") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .login-wrapper {
+      backdrop-filter: blur(8px);
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      max-width: 500px;
+      width: 90%;
+      margin-bottom: 2rem;
+    }
+
+    .login-form input, .login-form button {
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .login-form {
+      width: 100%;
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .login-form h2 {
+      font-family: 'Montserrat', sans-serif;
+      color: #4caf50;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .login-form p.text-muted {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 1rem;
+      width: 100%;
+    }
+
+    .form-group label {
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      display: block;
+      color: #333;
+    }
+
+    .form-control {
+      background-color: #f9f9f9;
+      color: #111;
+      border: 1px solid rgba(0,0,0,0.1);
+      padding-left: 1rem;
+      border-radius: 0.5rem;
+      height: 2.75rem;
+      width: 100%;
+      font-size: 0.95rem;
+    }
+
+    .btn-custom {
+      background: linear-gradient(to right, #66bb6a, #4caf50);
+      border: none;
+      color: white;
+      font-weight: 600;
+      width: 100%;
+      border-radius: 0.5rem;
+      padding: 0.6rem;
+      font-size: 1rem;
+      transition: 0.3s all ease-in-out;
+    }
+
+    .btn-custom:hover {
+      background-color: #2e7d32;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .note-banner {
+      background-color: rgba(255, 255, 255, 0.85);
+      color: #111;
+      font-family: 'Inter', sans-serif;
+      padding: 1.5rem 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      font-size: 1.1rem;
+      max-width: 800px;
+      width: 90%;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    a {
+      color: #2e7d32;
+    }
+
+    .logo {
+      width: 50px;
+      height: auto;
+      margin-bottom: 1rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-wrapper">
+    <div class="login-form">
+      <div class="text-center">
+        <img src="{% static 'firk.png' %}" alt="GreenFork Logo" class="logo">
+      </div>
+      <h2>Welcome Back!</h2>
+      <p class="text-muted">Let’s make every meal matter.</p>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="id_username">Username</label>
+          {{ form.username }}
+        </div>
+        <div class="form-group">
+          <label for="id_password">Password</label>
+          {{ form.password }}
+        </div>
+        <button type="submit" class="btn btn-custom">Login</button>
+      </form>
+      <p class="mt-3">Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+    </div>
+  </div>
+
+  <div class="note-banner">
+    🌍 <strong>1/3 of all food</strong> produced globally is wasted. 🥦 Food waste generates <strong>8–10%</strong> of global greenhouse gas emissions. 🍽️ Reducing food waste is the #1 solution to reverse climate change (Project Drawdown).
+  </div>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</body>
+</html>

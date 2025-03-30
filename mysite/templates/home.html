@@ -1,29 +1,167 @@
-{% if user.is_authenticated %}
-    <p>Welcome, {{ user.username }}!</p>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GreenFork | Welcome</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8faf6;
+    }
 
-    <a href="{% url 'create_post' %}">Create a Food Post</a>
-  
-    <h2>Available Posts:</h2>
-    {% if posts %}
-      <ul>
-        {% for post in posts %}
-          <li>
-            <h3>{{ post.foodname }}</h3>
-            <p>{{ post.description }}</p>
-            <p>Pickup Location: {{ post.pickup_location }}</p>
-            {% if post.image %}
-              <img src="{{ post.image.url }}" alt="Food Image" style="width: 200px; height: 200px;">
-            {% endif %}
-            <p>Expires at: {{ post.expiration_time }}</p>
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p>No available food posts at the moment.</p>
-    {% endif %}
+    .hero {
+      background: url("{% static 'background_food.avif' %}") no-repeat center center fixed;
+      background-size: cover;
+      height: 85vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
 
-    <a href="{% url 'logout' %}">Logout</a>
-{% else %}
-    <a href="{% url 'login' %}">Login</a> |
-    <a href="{% url 'signup' %}">Sign Up</a>
-{% endif %}
+    .top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #388e3c;
+      font-weight: bold;
+      font-size: 1.75rem;
+    }
+
+    .logo-container img {
+      height: 42px;
+    }
+
+    .auth-buttons a {
+      margin-left: 1rem;
+      font-size: 1rem;
+      padding: 0.6rem 1.2rem;
+    }
+
+    .btn-custom {
+      background-color: #66bb6a;
+      color: #fff;
+      border: none;
+    }
+
+    .btn-custom:hover {
+      background-color: #4caf50;
+    }
+
+    .btn-outline-light {
+      color: #388e3c;
+      border-color: #66bb6a;
+    }
+
+    .btn-outline-light:hover {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .glass-card {
+      backdrop-filter: blur(12px);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 3rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      max-width: 600px;
+      width: 90%;
+    }
+
+    .glass-card h1 {
+      font-size: 2.8rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .glass-card p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .why-it-matters {
+      background-color: #f2f7f2;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .why-it-matters h2 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #2e7d32;
+      margin-bottom: 1rem;
+    }
+
+    .why-it-matters p {
+      font-size: 1.25rem;
+      max-width: 800px;
+      margin: auto;
+      color: #444;
+    }
+
+    @media (max-width: 600px) {
+      .glass-card h1 {
+        font-size: 2rem;
+      }
+      .glass-card p {
+        font-size: 1rem;
+      }
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="top-bar">
+      <div class="logo-container">
+        <img src="{% static 'firk.png' %}" alt="GreenFork Logo">
+        GreenFork
+      </div>
+      <div class="auth-buttons">
+        <a href="{% url 'login' %}" class="btn btn-custom">Login</a>
+        <a href="{% url 'signup' %}" class="btn btn-outline-light">Sign Up</a>
+      </div>
+    </div>
+
+    <div class="glass-card">
+      <h1>Reduce Waste, Share Taste</h1>
+      <p>
+        At <strong>GreenFork</strong>, food is more than a meal — it’s a gesture of care. We connect neighbors through shared leftovers, so no plate gets wasted and every bite brings someone closer.
+      </p>
+    </div>
+  </div>
+
+  <section class="why-it-matters">
+    <h2>Why It Matters</h2>
+    <p>
+      🌍 Every single year, over <strong>1.3 billion tons</strong> of food goes uneaten — while millions go hungry. It’s time to rescue, share, and reconnect — together.
+    </p>
+  </section>
+
+</body>
+</html>
