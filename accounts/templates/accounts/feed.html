@@ -14,38 +14,40 @@
       font-family: 'Inter', sans-serif;
       background: url("{% static 'greent.jpg' %}") no-repeat center center fixed;
       background-size: cover;
-      padding: 2rem;
+      padding: 1rem;
     }
 
     .feed-container {
       background-color: rgba(255, 255, 255, 0.95);
       padding: 2rem;
       border-radius: 1rem;
-      max-width: 900px;
-      margin: 0 auto;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .feed-container h1 {
-      font-family: 'Montserrat', sans-serif;
-      color: #2e7d32;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
+      max-width: 1000px;
+      width: 100%;
     }
 
     .post-card {
       background-color: #ffffff;
       border-radius: 0.75rem;
-      padding: 1rem;
+      padding: 1.5rem;
       margin-bottom: 1.5rem;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .post-card img {
-      max-width: 100%;
-      height: auto;
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
       border-radius: 0.5rem;
-      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 768px) { /* For tablets and larger screens */
+      .post-card img {
+        width: 100%;
+        height: 100%;
+        max-height: 200px;
+        object-fit: cover;
+      }
     }
 
     .post-card h3 {
@@ -76,28 +78,39 @@
   </style>
 </head>
 <body>
-  <div class="feed-container">
-    <h1>Welcome to the Community Feed</h1>
-    <a href="{% url 'create_post' %}" class="btn-create">+ Create a New Food Post</a>
-
-    {% for post in posts %}
-      <div class="post-card">
-        {% if post.image %}
-          <img src="{{ post.image.url }}" alt="Food Image">
-        {% endif %}
-        <h3>{{ post.foodname }}</h3>
-        <p>{{ post.description }}</p>
-        <p><strong>Pickup Location:</strong> {{ post.pickup_location }}</p>
-        <p><strong>Expires:</strong> {{ post.expiration_time }}</p>
-        {% if request.user == post.owner %}
-        <a href="{% url 'edit_post' post.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
-        {% endif %}
+  <div class="container d-flex justify-content-center">
+    <div class="feed-container col-lg-10 col-md-11 col-12">
+      <h1 class="text-center">Welcome to the Community Feed</h1>
+      <div class="text-center">
+        <a href="{% url 'create_post' %}" class="btn-create">+ Create a New Food Post</a>
       </div>
-    {% empty %}
-      <p>No available food posts right now. Be the first to share!</p>
-    {% endfor %}
 
-    <p><a href="{% url 'logout' %}">Log out</a></p>
+      {% for post in posts %}
+        <div class="post-card">
+          <div class="row align-items-center"> 
+            {% if post.image %}
+              <div class="col-md-4 col-12 mb-3 mb-md-0">
+                <img src="{{ post.image.url }}" alt="Food Image" class="img-fluid">
+              </div>
+            {% endif %}
+            <div class="col-md-8 col-12">
+              <h3>{{ post.foodname }}</h3>
+              <p>{{ post.description }}</p>
+              <p><strong>Pickup Location:</strong> {{ post.pickup_location }}</p>
+              <p><strong>Expires:</strong> {{ post.expiration_time }}</p>
+
+              {% if request.user == post.owner %}
+                <a href="{% url 'edit_post' post.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p class="text-center">No available food posts right now. Be the first to share!</p>
+      {% endfor %}
+
+      <p class="text-center"><a href="{% url 'logout' %}">Log out</a></p>
+    </div>
   </div>
 </body>
 </html>
