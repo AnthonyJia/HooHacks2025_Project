@@ -22,7 +22,7 @@
       padding: 2rem;
       border-radius: 1rem;
       max-width: 900px;
-      margin: 0 auto 2rem auto;
+      margin: 0 auto;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
 
@@ -70,49 +70,6 @@
       text-decoration: none;
     }
 
-    .create-form {
-      background-color: #ffffff;
-      padding: 2rem;
-      border-radius: 1rem;
-      max-width: 900px;
-      margin: 0 auto;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .create-form h2 {
-      font-family: 'Montserrat', sans-serif;
-      color: #2e7d32;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .create-form form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .create-form form input,
-    .create-form form textarea,
-    .create-form form button {
-      margin-bottom: 1rem;
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-    }
-
-    .create-form form button {
-      background-color: #4caf50;
-      color: #fff;
-      border: none;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .create-form form button:hover {
-      background-color: #2e7d32;
-    }
-
     a {
       color: #2e7d32;
     }
@@ -138,16 +95,6 @@
     {% endfor %}
 
     <p><a href="{% url 'logout' %}">Log out</a></p>
-  </div>
-
-  <div class="create-form">
-    <h2>Create a New Food Post</h2>
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Create Post</button>
-    </form>
-    <a href="{% url 'feed' %}">Back to Feed</a>
   </div>
 </body>
 </html>
