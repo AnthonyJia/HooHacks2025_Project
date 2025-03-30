@@ -12,4 +12,4 @@ __pycache__/
 db.sqlite3
 
 #ignores food_images
-food_images/
+#food_images/
