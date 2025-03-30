@@ -11,8 +11,8 @@
             <h3>{{ post.foodname }}</h3>
             <p>{{ post.description }}</p>
             <p>Pickup Location: {{ post.pickup_location }}</p>
-            {% if post.photo %}
-              <img src="{{ post.photo.url }}" alt="Food Image" style="width: 200px; height: 200px;">
+            {% if post.image %}
+              <img src="{{ post.image.url }}" alt="Food Image" style="width: 200px; height: 200px;">
             {% endif %}
             <p>Expires at: {{ post.expiration_time }}</p>
           </li>
