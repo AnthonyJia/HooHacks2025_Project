@@ -16,7 +16,7 @@ This project promotes **sustainability**, **community sharing**, and supports pe
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/HooHacks2025_Project.git
+git clone https://github.com/AnthonyJia/HooHacks2025_Project.git
 cd HooHacks2025_Project
 
 # (Optional but recommended) Create and activate a virtual environment
